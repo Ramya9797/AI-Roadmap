@@ -4,3 +4,5 @@ pandas
 python-dotenv
 python-multipart
 pytest==9.1.1
+joblib
+httpx2
