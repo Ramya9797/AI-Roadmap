@@ -1,0 +1,185 @@
+[
+
+    {
+        "ticket": "Where is my order 1001?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "Where is my order?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "What is the status of my order?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "My order has not arrived yet.",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "Can you tell me where my package is?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "Can you track my order?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "I want to know when my order will arrive.",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "My package hasn't arrived.",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "Please check my order status.",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+    {
+        "ticket": "Can you check where my shipment is?",
+        "expected_intent": "order_status",
+        "expected_action": "lookup_order",
+        "expected_citation": "order_lookup"
+    },
+
+    {
+        "ticket": "I want a refund.",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "I need my money back.",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "How can I get a refund?",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "Can I return this product and get my money back?",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "I would like to request a refund.",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "Can I get my payment refunded?",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "I want to return the product.",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "What is your refund policy?",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "How do I get my money back?",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+    {
+        "ticket": "I am looking for a refund.",
+        "expected_intent": "refund_request",
+        "expected_action": "check_refund_policy",
+        "expected_citation": "refund_policy"
+    },
+
+    {
+        "ticket": "Hello, I need some help.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Can you help me?",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Hello.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Hi, I have a question.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "I need assistance.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Can someone help me?",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "I have a question about my account.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "I need some information.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Good morning, I need help.",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    },
+    {
+        "ticket": "Can you assist me with something?",
+        "expected_intent": "general",
+        "expected_action": "none",
+        "expected_citation": ""
+    }
+]

@@ -1,0 +1,41 @@
+age,monthly_bill,tenure,contract,payment,support_calls,internet_service,churn
+28,95,6,Month-to-month,Electronic,5,Fiber,0
+42,60,30,Two year,Credit card,1,DSL,1
+51,85,18,One year,Bank transfer,4,Fiber,0
+33,120,4,Month-to-month,Electronic,6,Fiber,1
+47,55,42,Two year,Credit card,2,DSL,0
+26,75,14,Month-to-month,Bank transfer,3,DSL,1
+56,105,22,One year,Electronic,5,Fiber,0
+38,65,25,Two year,Credit card,4,DSL,1
+24,50,36,Two year,Bank transfer,0,DSL,0
+49,115,7,Month-to-month,Electronic,7,Fiber,1
+35,90,20,One year,Credit card,2,Fiber,0
+44,70,9,Month-to-month,Bank transfer,5,DSL,1
+59,80,32,Two year,Electronic,3,DSL,0
+30,100,11,Month-to-month,Credit card,4,Fiber,1
+52,65,27,One year,Bank transfer,1,DSL,0
+21,88,5,Month-to-month,Electronic,6,Fiber,1
+45,95,24,Two year,Credit card,2,Fiber,0
+37,60,16,One year,Bank transfer,3,DSL,1
+63,110,8,Month-to-month,Electronic,5,Fiber,1
+32,55,38,Two year,Credit card,0,DSL,0
+41,100,13,Month-to-month,Bank transfer,4,Fiber,0
+55,72,29,One year,Electronic,2,DSL,1
+27,65,21,Two year,Credit card,1,DSL,0
+48,125,3,Month-to-month,Electronic,7,Fiber,1
+36,82,17,One year,Bank transfer,5,Fiber,0
+57,58,45,Two year,Credit card,2,DSL,1
+23,105,9,Month-to-month,Electronic,4,Fiber,0
+50,68,26,One year,Bank transfer,3,DSL,1
+34,115,6,Month-to-month,Credit card,6,Fiber,1
+46,62,34,Two year,Electronic,1,DSL,0
+29,78,12,One year,Bank transfer,4,Fiber,1
+53,92,19,Month-to-month,Electronic,3,Fiber,0
+40,58,31,Two year,Credit card,2,DSL,1
+25,108,7,Month-to-month,Bank transfer,5,Fiber,0
+61,75,28,One year,Electronic,4,DSL,1
+39,98,15,Month-to-month,Credit card,3,Fiber,1
+43,67,37,Two year,Bank transfer,1,DSL,0
+31,72,10,One year,Electronic,5,Fiber,1
+58,118,5,Month-to-month,Credit card,6,Fiber,0
+22,48,44,Two year,Bank transfer,0,DSL,0

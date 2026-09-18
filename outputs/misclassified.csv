@@ -1,0 +1,4 @@
+age,monthly_bill,tenure,support_calls,contract,payment,internet_service,actual,predicted,probability,confidence
+42,60,30,1,Two year,Credit card,DSL,1,0,0.4641747415541476,0.03582525844585238
+52,65,27,1,One year,Bank transfer,DSL,0,1,0.5157636644320648,0.015763664432064783
+33,120,4,6,Month-to-month,Electronic,Fiber,1,0,0.4943798190333392,0.005620180966660782

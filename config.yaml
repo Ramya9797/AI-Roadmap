@@ -1,0 +1,15 @@
+data:
+  path: data/churn.csv
+
+model:
+  max_iter: 1000
+
+training:
+  test_size: 0.2
+  random_state: 42
+
+output:
+  model_path: models/churn_model.joblib
+  metrics_path: outputs/metrics.json
+  confusion_matrix_path: outputs/confusion_matrix.png
+  errors_path: outputs/misclassified.csv
