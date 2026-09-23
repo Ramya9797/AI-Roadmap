@@ -77,3 +77,34 @@ class ChromaVectorStore:
         """
 
         return self.collection.get()
+
+
+    def search(
+    self,
+    query_embedding: List[float],
+    top_k: int = 3,
+    ) -> Dict:
+        """
+        Search Chroma for the most similar chunks.
+        """
+
+        if top_k <= 0:
+            raise ValueError("top_k must be greater than 0")
+
+        if self.collection.count() == 0:
+            return {
+                "ids": [[]],
+                "documents": [[]],
+                "metadatas": [[]],
+                "distances": [[]],
+            }
+
+        results = self.collection.query(
+            query_embeddings=[query_embedding],
+            n_results=min(
+                top_k,
+                self.collection.count(),
+            ),
+        )
+
+        return results
