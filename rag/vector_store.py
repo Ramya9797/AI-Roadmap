@@ -15,7 +15,9 @@ class ChromaVectorStore:
         self,
         collection_name: str = DEFAULT_COLLECTION_NAME,
     ):
-        self.client = chromadb.Client()
+        self.client = chromadb.PersistentClient(
+            path="rag/storage/chroma"
+        )
 
         self.collection = self.client.get_or_create_collection(
             name=collection_name
@@ -48,14 +50,15 @@ class ChromaVectorStore:
             for chunk in chunks
         ]
 
-        metadatas = [
-            {
-                "source": chunk["source"],
-                "document_type": chunk["document_type"],
-                "document_name": chunk["document_name"],
-            }
-            for chunk in chunks
-        ]
+        metadatas = [{
+            "source": chunk["source"],
+            "document_type": chunk["document_type"],
+            "document_name": chunk["document_name"],
+            "chunk_id": chunk["chunk_id"],
+            "chunk_index": chunk["chunk_index"],
+            "total_chunks": chunk["total_chunks"],
+        } for chunk in chunks]
+
 
         self.collection.upsert(
             ids=ids,
@@ -80,14 +83,11 @@ class ChromaVectorStore:
 
 
     def search(
-    self,
-    query_embedding: List[float],
-    top_k: int = 3,
+        self,
+        query_embedding: List[float],
+        top_k: int = 3,
+        where: Dict | None = None,
     ) -> Dict:
-        """
-        Search Chroma for the most similar chunks.
-        """
-
         if top_k <= 0:
             raise ValueError("top_k must be greater than 0")
 
@@ -101,10 +101,8 @@ class ChromaVectorStore:
 
         results = self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=min(
-                top_k,
-                self.collection.count(),
-            ),
+            n_results=min(top_k, self.collection.count()),
+            where=where,
         )
 
         return results

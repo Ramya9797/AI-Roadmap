@@ -128,3 +128,73 @@ def test_add_metadata_handles_empty_list():
     result = add_metadata([])
 
     assert result == []
+
+
+def test_add_metadata_creates_chunk_index():
+    chunks = [
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information",
+            "chunk_id": "refund_policy.md:0",
+        }
+    ]
+
+    result = add_metadata(chunks)
+
+    assert result[0]["chunk_index"] == 0
+
+
+def test_add_metadata_creates_total_chunks():
+    chunks = [
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information 1",
+            "chunk_id": "refund_policy.md:0",
+        },
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information 2",
+            "chunk_id": "refund_policy.md:1",
+        },
+    ]
+
+    result = add_metadata(chunks)
+
+    assert result[0]["total_chunks"] == 2
+    assert result[1]["total_chunks"] == 2
+
+
+def test_add_metadata_chunk_index_is_deterministic():
+    chunks = [
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information 1",
+            "chunk_id": "refund_policy.md:0",
+        },
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information 2",
+            "chunk_id": "refund_policy.md:1",
+        },
+    ]
+
+    result1 = add_metadata(chunks)
+    result2 = add_metadata(chunks)
+
+    assert result1[0]["chunk_index"] == result2[0]["chunk_index"]
+    assert result1[1]["chunk_index"] == result2[1]["chunk_index"]
+
+
+def test_add_metadata_preserves_deterministic_chunk_id():
+    chunks = [
+        {
+            "source": "refund_policy.md",
+            "text": "Refund information",
+            "chunk_id": "refund_policy.md:0",
+        }
+    ]
+
+    result1 = add_metadata(chunks)
+    result2 = add_metadata(chunks)
+
+    assert result1[0]["chunk_id"] == result2[0]["chunk_id"]

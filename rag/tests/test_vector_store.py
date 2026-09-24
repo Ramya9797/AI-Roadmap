@@ -20,6 +20,8 @@ def create_test_chunk(
         "chunk_id": chunk_id,
         "document_type": "policy",
         "document_name": "refund_policy",
+        "chunk_index": int(chunk_id.split(":")[-1]),
+        "total_chunks": 2,
     }
 
 
@@ -108,7 +110,15 @@ def test_get_all_returns_documents(store):
 
 def test_metadata_is_stored(store):
     chunks = [
-        create_test_chunk()
+        {
+            "source": "refund_policy.md",
+            "text": "Refunds are available within 30 days.",
+            "chunk_id": "refund_policy.md:0",
+            "document_type": "policy",
+            "document_name": "refund_policy",
+            "chunk_index": 0,
+            "total_chunks": 5,
+        }
     ]
 
     embeddings = [
@@ -127,6 +137,9 @@ def test_metadata_is_stored(store):
     assert metadata["source"] == "refund_policy.md"
     assert metadata["document_type"] == "policy"
     assert metadata["document_name"] == "refund_policy"
+    assert metadata["chunk_id"] == "refund_policy.md:0"
+    assert metadata["chunk_index"] == 0
+    assert metadata["total_chunks"] == 5
 
 
 def test_mismatched_chunk_embedding_count(store):

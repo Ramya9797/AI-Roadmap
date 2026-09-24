@@ -14,7 +14,17 @@ class FakeRetriever:
                 [
                     "Customers can request a refund within 30 days."
                 ]
-            ]
+            ],
+            "metadatas": [
+                [
+                    {
+                        "source": "refund_policy.md",
+                        "chunk_id": "refund_policy.md:0",
+                        "chunk_index": 0,
+                        "total_chunks": 1,
+                    }
+                ]
+            ],
         }
 
 

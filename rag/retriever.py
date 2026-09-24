@@ -21,15 +21,9 @@ class Retriever:
         self.store = store
         self.top_k = top_k
 
-    def retrieve(
-        self,
-        query_embedding: List[float],
-    ) -> Dict:
-        """
-        Retrieve the most relevant chunks.
-        """
-
+    def retrieve(self, query_embedding, where=None):
         return self.store.search(
-            query_embedding=query_embedding,
+            query_embedding,
             top_k=self.top_k,
+            where=where,
         )

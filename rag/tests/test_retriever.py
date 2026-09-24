@@ -16,6 +16,8 @@ def create_store():
             "chunk_id": "refund_policy.md:0",
             "document_type": "policy",
             "document_name": "refund_policy",
+            "chunk_index": 0,
+            "total_chunks": 1,
         },
         {
             "source": "shipping.md",
@@ -23,6 +25,8 @@ def create_store():
             "chunk_id": "shipping.md:0",
             "document_type": "shipping",
             "document_name": "shipping",
+            "chunk_index": 0,
+            "total_chunks": 1,
         },
         {
             "source": "support.md",
@@ -30,6 +34,8 @@ def create_store():
             "chunk_id": "support.md:0",
             "document_type": "support",
             "document_name": "support",
+            "chunk_index": 0,
+            "total_chunks": 1,
         },
     ]
 
@@ -165,3 +171,47 @@ def test_retriever_empty_store():
     )
 
     assert result["ids"] == [[]]
+
+
+def test_retriever_supports_metadata_filter():
+    store = ChromaVectorStore(
+        collection_name="retriever_metadata_filter_test"
+    )
+
+    chunks = [
+        {
+            "source": "refund_policy.md",
+            "text": "Refunds are available within 30 days.",
+            "chunk_id": "refund_policy.md:0",
+            "document_type": "policy",
+            "document_name": "refund_policy",
+            "chunk_index": 0,
+            "total_chunks": 1,
+        },
+        {
+            "source": "support.md",
+            "text": "Contact support for account assistance.",
+            "chunk_id": "support.md:0",
+            "document_type": "support",
+            "document_name": "support",
+            "chunk_index": 0,
+            "total_chunks": 1,
+        },
+    ]
+
+    embeddings = [
+        [1.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+    ]
+
+    store.add_chunks(chunks, embeddings)
+
+    retriever = Retriever(store, top_k=5)
+
+    result = retriever.retrieve(
+        [1.0, 0.0, 0.0],
+        where={"document_type": "policy"},
+    )
+
+    assert len(result["ids"][0]) == 1
+    assert result["ids"][0][0] == "refund_policy.md:0"
