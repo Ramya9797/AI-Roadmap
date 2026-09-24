@@ -37,3 +37,4 @@ uvicorn==0.52.4
 httpx2==2.13.0
 sentence-transformers
 chromadb
+openai
