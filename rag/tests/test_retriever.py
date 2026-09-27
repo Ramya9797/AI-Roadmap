@@ -215,3 +215,77 @@ def test_retriever_supports_metadata_filter():
 
     assert len(result["ids"][0]) == 1
     assert result["ids"][0][0] == "refund_policy.md:0"
+
+
+from rag.retrieval_evaluation import hit_rate, reciprocal_rank
+
+
+def test_hit_rate_when_relevant_chunk_is_retrieved():
+    retrieved = [
+        "customer_support.md:0",
+        "order_policy.md:0",
+        "churn_strategy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert hit_rate(retrieved, expected) == 1.0
+
+
+def test_hit_rate_when_relevant_chunk_is_not_retrieved():
+    retrieved = [
+        "customer_support.md:0",
+        "churn_strategy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert hit_rate(retrieved, expected) == 0.0
+
+
+def test_reciprocal_rank_when_relevant_chunk_is_first():
+    retrieved = [
+        "order_policy.md:0",
+        "customer_support.md:0",
+        "churn_strategy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert reciprocal_rank(retrieved, expected) == 1.0
+
+
+def test_reciprocal_rank_when_relevant_chunk_is_second():
+    retrieved = [
+        "customer_support.md:0",
+        "order_policy.md:0",
+        "churn_strategy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert reciprocal_rank(retrieved, expected) == 0.5
+
+
+def test_reciprocal_rank_when_relevant_chunk_is_fourth():
+    retrieved = [
+        "customer_support.md:0",
+        "churn_strategy.md:0",
+        "order_policy.md:1",
+        "order_policy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert reciprocal_rank(retrieved, expected) == 0.25
+
+
+def test_reciprocal_rank_when_no_relevant_chunk_is_retrieved():
+    retrieved = [
+        "customer_support.md:0",
+        "churn_strategy.md:0",
+    ]
+
+    expected = ["order_policy.md:0"]
+
+    assert reciprocal_rank(retrieved, expected) == 0.0

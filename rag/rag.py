@@ -91,7 +91,7 @@
 #             "citations": citations,
 #         }
 
-
+from rag.tracing import TraceRecorder
 from rag.embeddings import EmbeddingModel
 from rag.prompt import build_prompt
 from rag.retriever import Retriever
@@ -104,24 +104,43 @@ class RAGPipeline:
         llm,
         top_k: int = 3,
         query_rewriter=None,
+        trace_recorder=None,
     ):
         self.embedding_model = EmbeddingModel()
         self.retriever = Retriever(store, top_k=top_k)
         self.llm = llm
         self.query_rewriter = query_rewriter
+        self.trace_recorder = (
+            trace_recorder
+            if trace_recorder is not None
+            else TraceRecorder()
+        )
 
-    def answer(self, question: str, where=None) -> str:
+    def answer(self, question: str, where=None, use_recency=False) -> str:
         result = self.answer_with_citations(
             question,
             where=where,
+            use_recency=use_recency,
         )
         return result["answer"]
 
-    def answer_with_citations(self, question: str, where=None) -> dict:
+    def answer_with_citations(self, question: str, where=None, use_recency=False) -> dict:
         if not question.strip():
             raise ValueError("Question cannot be empty")
 
         normalized_question = question.strip()
+
+        trace_recorder = getattr(
+            self,
+            "trace_recorder",
+            None,
+        )
+
+        if trace_recorder is not None:
+            trace_recorder.record(
+                "question",
+                normalized_question,
+            )
 
         query_rewriter = getattr(
             self,
@@ -136,20 +155,56 @@ class RAGPipeline:
         else:
             search_query = normalized_question
 
+
+        if trace_recorder is not None:
+            trace_recorder.record(
+                "rewritten_query",
+                search_query,
+            )
+
         query_embedding = self.embedding_model.embed_documents(
             [search_query]
         )[0]
 
         if where is None:
-            results = self.retriever.retrieve(query_embedding)
+            if use_recency:
+                results = self.retriever.retrieve(
+                    query_embedding,
+                    use_recency=True,
+                )
+            else:
+                results = self.retriever.retrieve(
+                    query_embedding,
+                )
         else:
-            results = self.retriever.retrieve(
-                query_embedding,
-                where=where,
-            )
+            if use_recency:
+                results = self.retriever.retrieve(
+                    query_embedding,
+                    where=where,
+                    use_recency=True,
+                )
+            else:
+                results = self.retriever.retrieve(
+                    query_embedding,
+                    where=where,
+                )
 
         documents = results["documents"][0]
         metadatas = results["metadatas"][0]
+
+        if trace_recorder is not None:
+            trace_recorder.record(
+                "retrieval_count",
+                len(documents),
+            )
+
+            trace_recorder.record(
+                "retrieved_chunk_ids",
+                [
+                    metadata["chunk_id"]
+                    for metadata in metadatas
+                ],
+            )
 
         if not documents:
             return {
