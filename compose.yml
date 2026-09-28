@@ -1,0 +1,6 @@
+services:
+  rag-api:
+    image: rag-api:phase5
+    container_name: rag-api-compose
+    ports:
+      - "8000:8000"
