@@ -1,5 +1,6 @@
 from rag.tracing import TraceRecorder
 from rag.rag import RAGPipeline
+from rag.version import APP_VERSION, MODEL_VERSION
 
 
 class FakeLLM:
@@ -31,12 +32,15 @@ class FakeRetriever:
         }
 
 
-def test_trace_recorder_starts_empty():
+def test_trace_recorder_starts_with_version_metadata():
     recorder = TraceRecorder()
 
     trace = recorder.get_trace()
 
-    assert trace == {}
+    assert trace["app_version"] == "1.0.0"
+    assert trace["model_version"] == "all-MiniLM-L6-v2"
+    assert trace["prompt_version"] == "1.0.0"
+    assert trace["index_version"] == "1.0.0"
 
 
 def test_trace_recorder_records_question():
@@ -99,3 +103,21 @@ def test_rag_pipeline_records_trace():
         "order_policy.md:0"
     ]
     assert trace["retrieval_count"] == 1
+
+
+def test_trace_recorder_includes_version_metadata():
+    recorder = TraceRecorder()
+
+    recorder.record(
+        "app_version",
+        APP_VERSION,
+    )
+    recorder.record(
+        "model_version",
+        MODEL_VERSION,
+    )
+
+    trace = recorder.get_trace()
+
+    assert trace["app_version"] == "1.0.0"
+    assert trace["model_version"] == "all-MiniLM-L6-v2"
