@@ -62,3 +62,8 @@ def test_eval_dataset_chunk_ids_exist_in_vector_store():
     for item in dataset:
         for chunk_id in item["relevant_chunk_ids"]:
             assert chunk_id in stored_chunk_ids
+
+def test_eval_dataset_contains_10_cases():
+    dataset = load_eval_dataset()
+
+    assert len(dataset) == 10

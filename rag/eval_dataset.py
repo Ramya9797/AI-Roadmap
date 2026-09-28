@@ -4,11 +4,11 @@ from typing import List, Dict
 EVAL_DATASET = [
     {
         "question": "What is the refund policy?",
-        "relevant_chunk_ids": ["order_policy.md:0"],
+        "relevant_chunk_ids": ["refund_policy.md:0"],
     },
     {
         "question": "How can I check my order status?",
-        "relevant_chunk_ids": ["customer_support.md:0"],
+        "relevant_chunk_ids": ["order_policy.md:0"],
     },
     {
         "question": "What is the company's strategy?",
@@ -16,14 +16,33 @@ EVAL_DATASET = [
     },
     {
         "question": "How long does a refund take?",
-        "relevant_chunk_ids": ["order_policy.md:0"],
+        "relevant_chunk_ids": ["refund_policy.md:0"],
     },
     {
         "question": "What should I do about my order?",
+        "relevant_chunk_ids": ["order_policy.md:0"],
+    },
+    {
+        "question": "Can I get a refund for my order?",
+        "relevant_chunk_ids": ["refund_policy.md:0"],
+    },
+    {
+        "question": "Where can I find information about my order?",
+        "relevant_chunk_ids": ["order_policy.md:0"],
+    },
+    {
+        "question": "What is the customer churn strategy?",
+        "relevant_chunk_ids": ["churn_strategy.md:0"],
+    },
+    {
+        "question": "How do I request a refund?",
+        "relevant_chunk_ids": ["refund_policy.md:0"],
+    },
+    {
+        "question": "Who can help me with an order issue?",
         "relevant_chunk_ids": ["customer_support.md:0"],
     },
 ]
-
 
 def load_eval_dataset() -> List[Dict]:
     return EVAL_DATASET.copy()
