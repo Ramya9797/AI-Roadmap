@@ -1,0 +1,7 @@
+APP_VERSION = "1.0.0"
+
+MODEL_VERSION = "all-MiniLM-L6-v2"
+
+PROMPT_VERSION = "1.0.0"
+
+INDEX_VERSION = "1.0.0"
